@@ -1,22 +1,31 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import {NavLink} from "react-router-dom"
 import NavItem from "./NavItem";
 import LangSwitcher from "./LangSwitcher";
+import { TogglerOpen } from "./Toggler";
 
 const Navbar = () => {
     const { language, langScripts  } = useContext(LanguageContext)
 
-    const [navbarOpen, setNavbarOpen] = useState(false)
+    const [navbarOpen, setNavbarOpen] = useState("")
+    const [toggleIcon, setTogglerIcon] = useState("")
+
 
     const handleToggle = () => {
-        setNavbarOpen(prev => !prev)
+        navbarOpen ? setNavbarOpen("") : setNavbarOpen("nav__active")
+        navbarOpen ? setTogglerIcon("") : setTogglerIcon("toggle")
+        
 
     }
 
     const styles = {
         nav: {
             backgroundColor: langScripts.colorCombinations[language].backgroundColor,
+            color: langScripts.colorCombinations[language].textColor,
+        },
+        navMenu: {
+            backgroundColor: langScripts.colorCombinations[language].detailColorA,
             color: langScripts.colorCombinations[language].textColor,
         },
         link: {
@@ -27,28 +36,29 @@ const Navbar = () => {
     
     window.addEventListener("resize", () => {
         if(window.innerWidth > 500) {
-            setNavbarOpen(false)
-        }
+            setNavbarOpen("")
+            styles.navMenu.backgroundColor = langScripts.colorCombinations[language].backgroundColor
+        } 
     })
+
+    
     
     return(
-        <nav style={styles.nav} className="nav">
+        <nav id="navbar" className="sticky" style={styles.nav} >
             <div className="nav-collapsed">
-                {!navbarOpen && <div className="nav-logo"><NavLink style={styles.link} className='logoLink' to={"/"}>VB.</NavLink></div>}
-
-                <div onClick={handleToggle} className="hamb-menu">
-                    {navbarOpen ? <i className="fa fa-close"></i> : <i className="fa fa-bars"></i>}
-                </div>
+                <div className="nav-logo"><NavLink style={styles.link} className='logoLink' to={"/"}>Valdir <br /><span>Bezerra.</span></NavLink></div>
+                <TogglerOpen onClick={handleToggle} toggleIcon={toggleIcon}/>
+                {/*<div onClick={handleToggle} className="hamb-menu">
+                    /*navbarOpen ? <i className="fa fa-close"></i> : <i className="fa fa-bars"></i> 
+                    </div>*/}
             </div>
-            <div className='nav-container'>
-
-                {navbarOpen && 
+            <div style={styles.navMenu} className={`nav-container ${navbarOpen}`}>          
                 <div className="nav-menu">
                     <ul className="nav-ul">
                         <NavItem styles={styles.link} />
                         <LangSwitcher />
                     </ul>
-                </div>}
+                </div>
             </div>
         </nav>
     )

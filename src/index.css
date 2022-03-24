@@ -1,27 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2em;
+}
+
+/*=================================================================================================================
+=========================================== MOBILE FIRST===========================================================
+==================================================================================================================*/
+
+
+/*------------------------------------
+--------------- NAVBAR ---------------
+------------------------------------*/
+
+.sticky {
+  position:fixed;
+  width: 100%;
+  z-index: 3;
+  overflow: hidden;
+  top: 0;
 }
 
 .nav-collapsed {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  padding: 0 .3em .3em .3em;
+}
+
+.nav-logo {
+  order: 1
+}
+
+.nav__toggler {
+  order: 2;
+  z-index: 9;
 }
 
 .nav-container {
   display: flex;
   flex-direction: column;
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  transition: 0.5s linear;
+  font-weight: bold;
 }
 
-.hamb-menu {
+.nav__active {
+  transform: translateX(0%);
+  transition: 0.5s linear;
+  
+}
+
+.nav__toggler div {
+  width: 1.8rem;
+  height: 0.3rem;
+  border-radius: 50px;
+  background-color: black;
+  transition: 0.4s ease-in;
+}
+
+.line1 {
+  width: 1.3rem !important;
+  align-self: flex-end;
+}
+
+.nav__toggler {
+  cursor: pointer;
+  display: block;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  align-self: center;
+  height: 100%;
+  margin-right: .5em;
+  z-index: 4;
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-8px, 7px) scaleX(1.4);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-4px, -8px);
+}
+
+.nav-logo { 
+  padding-top: .3em;
+  max-height: 3.7em;
+}
+
+.logoLink, .logoLink span {
+  font-family: 'Cedarville Cursive', cursive;
+  font-size: 20px;
+  padding: .3em 0 0 .2em;
+  margin: 0;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.logoLink span {
+  padding: 0;
+  position: absolute;
+  left: 1em;
+  top: 1.4em;
+}
+
+.logoLink  {
+  position: relative;
+}
+
+.nav-menu {
+  height: 100%;
 }
 
 .nav-ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3em;
   list-style: none;
+  font-size: 1.3rem;
+  padding: 2em ;
+  padding-top: 5em;
+  transition: all .5s;
+  height: 100%;
+}
+
+.toggle {
+  position: fixed;
+  right: .3em;
+}
+
+
+.nav-li-lang {
+  list-style: none;
+  transition: all .5s;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  position: fixed;
+  left: 2.2em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  flex-wrap: wrap;
+  padding: .5em;
+  margin-top: .3em;
+  justify-content: center;
+  align-items: center;
+  gap: .7em;
+  opacity: 1;
+  transition: all .5s;
+  transform: translateY(-50%) scaleY(0);
+}
+
+.visible {
+  transform: translateY(0%);
+  transition: transform .5s, opacity 1s ease-in;
+  opacity: 1;
+  
 }
 
 .fa-bars {
@@ -30,6 +182,211 @@
   text-align: right;
 }
 
-.nav-langSwitcher:hover {
+.nav-langSwitcher {
   cursor: pointer;
+  max-width:min-content;
+  position: relative;
+  
 }
+
+.nav-langSwitcher p {
+  text-align: center;
+  padding: 10px;
+}
+
+
+/*------------------------------------
+--------------- BODY ---------------
+------------------------------------*/
+
+.home-main {
+  margin-top: 3.6em;
+  height: 91.7vh;
+ 
+  
+}
+
+.progImg-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.profImg {
+  position: absolute;
+  right: -16.6em;
+  z-index: 0;
+  bottom: 0;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(.7) ;
+  /*
+  transform: scaleX(-1)*/
+  ;
+}
+
+.progImg-container:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 70%, black 100%);
+  z-index: 0;
+}
+
+.home-title {
+  position: absolute;
+  top:2.2em;
+  font-size: 4em;
+  z-index: 1;
+  margin-left: .3em;
+}
+
+.name1, .name2 {
+  position: relative;
+}
+.name1::after, .name2::after {
+  position: absolute;
+  content:"";
+  /*
+  top: .5em;
+  right: -.2em;
+  height: .3em;
+  */
+  top: .7em;
+  right: -.2em;
+  height: .42em;
+  /*background-color: rgb(93, 128, 116);*/
+  background-color: rgb(206, 204, 86);
+  z-index: -1;
+}
+
+.name1::after {
+  /*
+  width: 1.5em;
+  */
+  width: 2.2em;
+}
+.name2::after {
+  /*
+  width: 2.3em;
+  */
+  width: 3em;
+}
+
+/*---------------------------------------
+--------------- Section 1 ---------------
+---------------------------------------*/
+
+
+.section-first {
+  background-color: #1b1b1b;
+  height: 100%;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  padding-left: 2.5em;
+}
+
+
+.section-first-title {
+  font-size: 3em;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-first-title span:nth-of-type(2) {
+  margin-left: 1.3em;
+}
+.section-first-title span:nth-of-type(3) {
+  margin-left: 2.6em;
+}
+
+.paragraphs {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.parr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+}
+
+.section-first-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1em;
+  width: 80%;
+  line-height: 1.6em;
+}
+
+.icon {
+  font-size: 3em;
+}
+
+.icon-grad {
+  transform: rotateZ(-20deg);
+}
+
+.parr p {
+  color: grey;
+  font-size: .8em;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025em;
+  line-height: 2em; 
+  padding: 0 3em 0 0; 
+}
+
+.resume {
+  margin-top: 3em;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  position: relative;
+}
+
+.download {
+  position: relative;
+  letter-spacing: 1px;
+}
+
+.download::before {
+  position:absolute;
+  content: "";
+  bottom: .6em;
+  left: -2.5em;
+  width: .8em;
+  height: 1px;
+  background-color: white;
+  
+}
+
+
+/*------------------------------------
+--------------- FOOTER ---------------
+------------------------------------*/
+
+.footer {
+  background-color: #1b1b1b;
+  color: #fafafa;
+  font-size: .8em;
+  text-decoration: none;
+  padding:2em;
+  padding-left: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  
+}
+
+.footer p {
+  line-height: 1.5em;
+}
+
+

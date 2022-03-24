@@ -13,10 +13,10 @@ const PATHS = [
                                 portuguese:"Sobre mim"
     }},
     {pathId:"3",path: "/my-work",pathName:{
-                                    spanish:"Mis trabajos",
-                                    english:"My work",
-                                    russian:"Моя работа",
-                                    portuguese:"Meus trabalhos"
+                                    spanish:"Publicaciones",
+                                    english:"Publications",
+                                    russian:"Публикации",
+                                    portuguese:"Publicações"
     }},
     {pathId:"4",path: "/contact",pathName:{
                                     spanish:"Contacto",
